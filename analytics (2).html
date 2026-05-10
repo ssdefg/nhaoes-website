@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Data Analyst Portfolio</title>
+    <!-- Google Fonts: Inter for a clean, professional sans-serif look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome CDN for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS Variables & Reset --- */
+        :root {
+            /* Base Theme Colors */
+            --bg-color: #0A192F; /* Deep Navy Background */
+            --text-primary: #ffffff;
+            --text-secondary: #8892b0;
+            --accent-color: #64ffda; /* Main Teal highlight */
+            --accent-blue: #3b82f6; /* Secondary Blue for gradients/depth */
+            
+            /* Glassmorphism Base */
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            
+            /* Layout & Interaction variables */
+            --section-spacing: 100px;
+            --card-radius: 16px;
+            --transition-speed: 0.4s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- Utility Classes --- */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 0;
+        }
+        
+        .section-title span {
+            color: var(--accent-color);
+        }
+
+        /* Standard Glass Card */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* --- Header Section --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 0 5%;
+        }
+
+        .header-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .header-content .highlight {
+            color: var(--accent-color);
+        }
+
+        /* Typing Animation Container */
+        .typing-container {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            min-height: 1.6em; /* Prevent layout shift */
+        }
+
+        #typing-text {
+            border-right: 2px solid var(--accent-color);
+            padding-right: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        /* --- Core Competencies Section (Strength Cards) --- */
+        #competencies {
+            padding: var(--section-spacing) 0;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .strength-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .strength-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 20px -10px rgba(100, 255, 218, 0.3);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .strength-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .strength-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        /* Interactive Metric Highlight */
+        .card-metric {
+            font-weight: 700;
+            color: var(--accent-color);
+            display: block;
+            margin-top: 15px;
+            opacity: 0.7;
+            transform: scale(0.95);
+            transition: all 0.3s ease;
+        }
+
+        .strength-card:hover .card-metric {
+            opacity: 1;
+            transform: scale(1.05);
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+        }
+
+
+        /* --- [INTEGRATED SECTION] Project Projects Framework --- */
+        #projects-framework {
+            padding: var(--section-spacing) 0;
+        }
+
+        .project-section-wrapper {
+            margin-bottom: 6rem;
+        }
+
+        .project-header {
+            margin-bottom: 2.5rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 1.5rem;
+        }
+
+        .project-header h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .project-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Layered Process Grid Layout */
+        .process-grid {
+            display: flex;
+            align-items: stretch;
+            justify-content: space-between;
+            gap: 15px;
+            position: relative;
+        }
+
+        /* Flow Indicator Arrows */
+        .flow-arrow {
+            display: flex;
+            align-items: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            opacity: 0.5;
+            z-index: 10;
+        }
+
+        /* Base Step Card Styling (Specialized Glassmorphism) */
+        .step-card {
+            flex: 1;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: var(--card-radius);
+            padding: 2rem;
+            position: relative;
+            transition: all var(--transition-speed) cubic-bezier(0.25, 0.8, 0.25, 1);
+            overflow: hidden;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Layered Depth Strategy */
+        /* Step 1: Furthest away */
+        .step-1 {
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(16px);
+            opacity: 0.85;
+        }
+        /* Step 2 & 3: Mid-ground */
+        .step-2 { z-index: 2; background: rgba(255, 255, 255, 0.04); backdrop-filter: blur(12px); opacity: 0.9; }
+        .step-3 { z-index: 3; background: rgba(255, 255, 255, 0.06); backdrop-filter: blur(8px); opacity: 0.95; }
+
+        /* Step 4: Closest, sharpest focus */
+        .step-4 {
+            z-index: 4;
+            background: rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(4px);
+            opacity: 1;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Step Content & Micro-Interactions */
+        .step-header {
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: var(--accent-blue); /* Use secondary accent for labels */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        /* The Reveal Mechanism */
+        .step-details {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            opacity: 0; /* Hidden by default */
+            transform: translateY(20px);
+            transition: all var(--transition-speed) ease;
+            flex-grow: 1;
+        }
+
+        /* Hover Effects for Steps */
+        .step-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            z-index: 10;
+        }
+
+        .step-card:hover .step-details {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+
+        /* The Glow Effect for Results (Step 4) */
+        @keyframes rotation {
+            0% { --gradient-angle: 0deg; }
+            100% { --gradient-angle: 360deg; }
+        }
+
+        @property --gradient-angle {
+            syntax: "<angle>";
+            initial-value: 0deg;
+            inherits: false;
+        }
+
+        .result-glow {
+            position: relative;
+            background: rgba(10, 25, 47, 0.8) !important; /* Darker background for contrast */
+        }
+
+        /* The animated border glow layer */
+        .result-glow::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            z-index: -1;
+            background: conic-gradient(
+                from var(--gradient-angle),
+                var(--accent-blue),
+                var(--accent-color),
+                #8b5cf6, /* Purple addition for depth */
+                var(--accent-blue)
+            );
+            border-radius: inherit;
+            animation: rotation 8s linear infinite;
+            filter: blur(12px);
+            opacity: 0.7;
+            transition: opacity var(--transition-speed);
+        }
+        
+        .result-glow:hover::before {
+            opacity: 1;
+            filter: blur(8px);
+        }
+        
+        .result-highlight {
+            font-weight: 700;
+            color: var(--text-primary);
+            font-size: 1.05rem;
+        }
+        .result-highlight span {
+            color: var(--accent-color);
+        }
+
+        /* --- Skill Dashboard Section --- */
+        #skills {
+            padding: var(--section-spacing) 0;
+            margin-bottom: 50px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category h3 {
+            margin-bottom: 25px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-category h3 i {
+            margin-right: 10px;
+            color: var(--accent-color);
+        }
+
+        .skill-item {
+            margin-bottom: 20px;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 8px;
+            background-color: var(--glass-border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background-color: var(--accent-color);
+            border-radius: 4px;
+            width: 0; /* Animated via JS later */
+            transition: width 1s ease-in-out;
+        }
+
+
+        /* --- Footer --- */
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 900px) {
+            /* Project Section Mobile Stacking */
+            .process-grid {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .flow-arrow {
+                display: none;
+            }
+            
+            .step-card {
+                min-height: auto;
+                opacity: 1 !important;
+                backdrop-filter: blur(10px) !important;
+                z-index: 1 !important;
+            }
+
+            .step-details {
+                opacity: 0.8; /* Visible on mobile by default */
+                transform: translateY(0);
+                margin-top: 15px;
+            }
+            
+            .result-glow::before {
+                opacity: 0.6;
+                inset: -1px;
+                filter: blur(8px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .typing-container {
+                font-size: 1.1rem;
+            }
+            
+            .skills-grid {
+                 grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section: Introduction & Value Proposition -->
+    <header>
+        <div class="container header-content">
+            <h1>Hello, I'm a <span class="highlight">Strategic Analyst.</span></h1>
+            <div class="typing-container">
+                <span id="typing-text"></span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Section 1: Core Competencies -->
+        <section id="competencies">
+            <div class="container">
+                <h2 class="section-title">Core Competencies</h2>
+                <div class="cards-grid">
+                    <!-- Card 1 -->
+                    <article class="glass-card strength-card">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <h3>Data-Driven Analysis</h3>
+                        <p>학원 행정 데이터를 구조화하여 업무 효율성을 극대화하고, 지적 장애 학생의 행동 패턴을 데이터로 지표화하여 맞춤형 교육의 근거를 마련했습니다.</p>
+                        <span class="card-metric">
+                            <i class="fa-solid fa-arrow-trend-up"></i> 행정 프로세스 효율 최적화 달성
+                        </span>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article class="glass-card strength-card">
+                        <div class="card-icon">
+                            <i class="fa-regular fa-compass"></i>
+                        </div>
+                        <h3>Global Strategy & Planning</h3>
+                        <p>노르웨이 대학 내 한국 문화 부스를 기획하며 현지 선호도 데이터를 분석, 타겟 맞춤형 전략으로 독보적인 성과를 창출했습니다.</p>
+                        <span class="card-metric">
+                            <i class="fa-solid fa-trophy"></i> 문화 부스 참여율 전체 1위 달성
+                        </span>
+                    </article>
+
+                    <!-- Card 3 -->
+                    <article class="glass-card strength-card">
+                        <div class="card-icon">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3>Digital Marketing Execution</h3>
+                        <p>트렌드 데이터 기반의 카드뉴스 기획과 콘텐츠 최적화 전략을 통해 타겟 오디언스의 참여를 이끌어내고 영향력을 확대했습니다.</p>
+                        <span class="card-metric">
+                            <i class="fa-solid fa-users"></i> 2,000+ 팔로워 계정 성장 견인
+                        </span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Project Framework (Integrated Layered Grid Section) -->
+        <section id="projects-framework">
+            <div class="container">
+                <h2 class="section-title">Strategic Impact Framework: <span>Data to Action</span></h2>
+
+                <!-- ================= Project 01 ================= -->
+                <div class="project-section-wrapper" id="project-1">
+                    <div class="project-header">
+                        <h3>PROJECT 01. 교육봉사 행정 효율화 (Data-Driven Efficiency)</h3>
+                        <p>데이터 기반의 봉사자 그룹핑 및 리더제 도입을 통한 운영 프로세스 혁신</p>
+                    </div>
+
+                    <div class="process-grid">
+                        <!-- Step 1: Problem -->
+                        <div class="step-card step-1">
+                            <div class="step-header">
+                                <i class="fa-solid fa-triangle-exclamation"></i> STEP 01
+                            </div>
+                            <div class="step-title">Problem Recognition</div>
+                            <div class="step-details">
+                                <p>봉사자 간 업무 혼선 및 명확한 가이드라인 부재를 확인했습니다. 이로 인해 낮은 프로그램 이행률(초기 20% 수준)이 지속되는 문제를 인지했습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+
+                        <!-- Step 2: Analysis -->
+                        <div class="step-card step-2">
+                            <div class="step-header">
+                                <i class="fa-solid fa-magnifying-glass-chart"></i> STEP 02
+                            </div>
+                            <div class="step-title">Data Analysis</div>
+                            <div class="step-details">
+                                <p>기존의 학생성향분석 보고서를 심층 검토했습니다. 학생들의 '인지 수준'과 '주요 관심사'를 정량적 지표로 변환하여 데이터화했습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+
+                        <!-- Step 3: Action -->
+                        <div class="step-card step-3">
+                            <div class="step-header">
+                                <i class="fa-solid fa-chess-board"></i> STEP 03
+                            </div>
+                            <div class="step-title">Strategic Action</div>
+                            <div class="step-details">
+                                <p>분석된 지표를 기반으로 봉사 대상 학생을 3개 그룹으로 분류했습니다. 각 팀원의 강점에 맞춰 전담 리더제를 도입하여 맞춤형 대응 체계를 구축했습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+
+                        <!-- Step 4: Result (Glow Effect) -->
+                        <div class="step-card step-4 result-glow">
+                            <div class="step-header" style="color: var(--accent-color);">
+                                <i class="fa-solid fa-chart-line"></i> STEP 04
+                            </div>
+                            <div class="step-title">Quantifiable Result</div>
+                            <div class="step-details">
+                                <p class="result-highlight">초기 대비 혁신적인 개선을 이루어, 최종적으로 <span>프로그램 이행률 100%를 달성</span>했습니다. 데이터 기반의 체계적 운영 구조를 확립했습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- ================= Project 02 ================= -->
+                <div class="project-section-wrapper" id="project-2">
+                    <div class="project-header" style="border-color: var(--accent-blue);">
+                        <h3>PROJECT 02. 노르웨이 문화교류 전략 (Strategic Market Research)</h3>
+                        <p>현지 트렌드 데이터 분석 기반의 타겟팅 및 지속가능한 네트워크 구축 전략</p>
+                    </div>
+
+                    <div class="process-grid">
+                        <!-- Step 1: Targeting -->
+                        <div class="step-card step-1">
+                            <div class="step-header">
+                                <i class="fa-solid fa-bullseye"></i> STEP 01
+                            </div>
+                            <div class="step-title">Targeting & Research</div>
+                            <div class="step-details">
+                                <p>노르웨이 현지 대학생을 대상으로 한국 문화 선호도를 조사하고, 관련 SNS 트렌드 데이터를 수집 및 분석하여 잠재 수요를 파악했습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+
+                        <!-- Step 2: Strategy -->
+                        <div class="step-card step-2">
+                            <div class="step-header">
+                                <i class="fa-solid fa-lightbulb"></i> STEP 02
+                            </div>
+                            <div class="step-title">Strategic Planning</div>
+                            <div class="step-details">
+                                <p>분석 결과를 바탕으로, 화제성 높은 '불닭볶음면'을 유입책(Hook)으로 활용하고, '김밥' 체험을 결합한 전략적 부스 콘텐츠를 기획했습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+
+                        <!-- Step 3: Networking -->
+                        <div class="step-card step-3">
+                            <div class="step-header">
+                                <i class="fa-solid fa-handshake-simple"></i> STEP 03
+                            </div>
+                            <div class="step-title">Sustainable Networking</div>
+                            <div class="step-details">
+                                <p>일회성 행사에 그치지 않도록, 국제팀의 요청에 따라 격주 단위의 정기 문화교류 모임 프로세스를 설계하여 지속적인 관계 유지 기반을 마련했습니다.</p>
+                            </div>
+                        </div>
+
+                        <div class="flow-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+
+                        <!-- Step 4: Outcome (Glow Effect) -->
+                        <div class="step-card step-4 result-glow">
+                            <div class="step-header" style="color: var(--accent-color);">
+                                <i class="fa-solid fa-trophy"></i> STEP 04
+                            </div>
+                            <div class="step-title">Successful Outcome</div>
+                            <div class="step-details">
+                                <p class="result-highlight">전략적 기획을 통해 <span>교내 부스 참여율 1위를 달성</span>했습니다. 또한, 현지 학생들과의 지속가능한 글로벌 네트워크를 성공적으로 구축했습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Section 3: Skill Dashboard -->
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title">Analytical Tool Proficiency</h2>
+                <div class="skills-grid cards-grid">
+                    
+                    <!-- Data Analysis Tools -->
+                    <div class="glass-card skill-category">
+                        <h3><i class="fa-solid fa-database"></i> Data Analysis</h3>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>SQL (MySQL/PostgreSQL)</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 85%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>MS Excel (Advanced)</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 95%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>UCINET (Network Analysis)</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 70%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visualization & Planning Tools -->
+                    <div class="glass-card skill-category">
+                        <h3><i class="fa-solid fa-pen-ruler"></i> Visualization & Planning</h3>
+                        
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Canva / Design Tools</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 90%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Strategic Documentation</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 90%;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Logic-driven Strategy. Evidence-based Execution.</p>
+            <p>© 2026 Strategic Data Analyst Portfolio.</p>
+        </div>
+    </footer>
+
+    <!-- Vanilla JavaScript for Interactions -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 1. Typing Animation Effect ---
+            const text = "데이터로 기획하고 실행으로 증명하는 경영 전략가";
+            const typingElement = document.getElementById('typing-text');
+            let index = 0;
+            let isDeleting = false;
+            let typingSpeed = 100;
+
+            function type() {
+                const currentText = text.substring(0, index);
+                typingElement.textContent = currentText;
+
+                if (!isDeleting && index < text.length) {
+                    index++;
+                    typingSpeed = 100;
+                } else if (isDeleting && index > 0) {
+                    index--;
+                    typingSpeed = 50;
+                } else {
+                    isDeleting = !isDeleting;
+                    typingSpeed = isDeleting ? 2000 : 500;
+                }
+
+                setTimeout(type, typingSpeed);
+            }
+
+            setTimeout(type, 1000);
+
+
+            // --- 2. Simple Scroll Reveal for Progress Bars ---
+            const progressBars = document.querySelectorAll('.progress-bar-fill');
+            
+            const observerOptions = {
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if(entry.isIntersecting) {
+                        const targetWidth = entry.target.style.width;
+                        entry.target.style.width = '0';
+                        setTimeout(() => {
+                            entry.target.style.width = targetWidth;
+                        }, 100);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            progressBars.forEach(bar => {
+                observer.observe(bar);
+            });
+
+             // --- 3. Project Step Hover Smoothening (Optional) ---
+             document.querySelectorAll('.step-card').forEach(card => {
+                let timeout;
+                card.addEventListener('mouseenter', () => {
+                    clearTimeout(timeout);
+                });
+                card.addEventListener('mouseleave', () => {
+                    timeout = setTimeout(() => {
+                        // Allows for smoother transition out
+                    }, 100);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
